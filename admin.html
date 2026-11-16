@@ -11,7 +11,7 @@
 <body>
   <div id="login-screen" class="login-screen">
     <header class="login-topbar">
-      <a class="brand-link" href="/" aria-label="AUTO VERSE — volver a la web">
+      <a class="brand-link" href="/" data-i18n-aria="brandLinkLabel" aria-label="AUTO VERSE — volver a la web">
         <img class="brand-logo" src="assets/auto-verse-wordmark.jpeg" alt="AUTO VERSE">
       </a>
       <div class="language-switch language-switch-dark" role="group" data-i18n-aria="languageLabel" aria-label="Idioma">
@@ -76,7 +76,7 @@
 
   <main id="dashboard" class="dashboard" hidden>
     <header class="dashboard-topbar">
-      <a class="brand-link" href="/" aria-label="AUTO VERSE — volver a la web"><img class="brand-logo" src="assets/auto-verse-wordmark.jpeg" alt="AUTO VERSE"></a>
+      <a class="brand-link" href="/" data-i18n-aria="brandLinkLabel" aria-label="AUTO VERSE — volver a la web"><img class="brand-logo" src="assets/auto-verse-wordmark.jpeg" alt="AUTO VERSE"></a>
       <div class="dashboard-actions">
         <div class="language-switch language-switch-dark" role="group" data-i18n-aria="languageLabel" aria-label="Idioma">
           <button type="button" data-language="en" aria-pressed="false">EN</button>
@@ -97,14 +97,14 @@
         <div class="live-badge"><span></span><span data-i18n="liveStatus">SISTEMA ACTIVO</span></div>
       </section>
 
-      <section class="stat-strip" aria-label="Resumen">
+      <section class="stat-strip" data-i18n-aria="summaryLabel" aria-label="Resumen">
         <article class="stat-card"><span class="stat-label" data-i18n="statInventory">VEHÍCULOS EN STOCK</span><strong id="stock-count">0</strong><small data-i18n="statInventoryCopy">Publicados en la web</small></article>
         <article class="stat-card stat-card-highlight"><span class="stat-label" data-i18n="statControl">TU CONCESIONARIO</span><strong data-i18n="statControlValue">Bajo control</strong><small data-i18n="statControlCopy">Gestión privada y segura</small></article>
       </section>
 
       <section class="content-card" aria-labelledby="form-title">
         <header class="section-heading">
-          <div><p class="eyebrow" data-i18n="newListing">NUEVA FICHA</p><h2 id="form-title" data-i18n="addCarTitle">Añadir un vehículo</h2><p data-i18n="addCarCopy">Completa la información para publicarlo en tu stock.</p></div>
+          <div><p class="eyebrow" data-i18n="newListing">NUEVA FICHA</p><h2 id="form-title" data-i18n="addCarTitle">Añadir un vehículo</h2><p id="form-copy" data-i18n="addCarCopy">Completa la información para publicarlo en tu stock.</p></div>
           <span class="section-number">01</span>
         </header>
         <form id="car-form" class="car-form">
@@ -119,9 +119,9 @@
             <label for="transmission"><span data-i18n="transmissionLabel">Cambio</span><select id="transmission" name="transmission"><option value="Manual" data-i18n="manual">Manual</option><option value="Automático" data-i18n="automatic">Automático</option></select></label>
             <label for="body-type"><span data-i18n="bodyTypeLabel">Carrocería</span><input id="body-type" name="body_type" required autocomplete="off" data-i18n-placeholder="bodyTypePlaceholder" placeholder="SUV, berlina…"></label>
             <label class="field-wide" for="description"><span data-i18n="descriptionLabel">Descripción</span><textarea id="description" name="description" rows="4" data-i18n-placeholder="descriptionPlaceholder" placeholder="Destaca el estado y el equipamiento del vehículo…"></textarea></label>
-            <label class="field-wide" for="photo"><span data-i18n="photoLabel">Fotografía principal</span><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required><small class="field-hint" data-i18n="photoHint">JPG, PNG o WebP · máximo 3 MB</small></label>
+            <label class="field-wide" for="photo"><span data-i18n="photoLabel">Fotografía principal</span><input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required><small id="photo-hint" class="field-hint" data-i18n="photoHint">JPG, PNG o WebP · máximo 3 MB</small></label>
           </div>
-          <div class="form-bottom"><p id="note" class="form-status" role="status" aria-live="polite"></p><button class="primary-button save-button" type="submit"><span data-i18n="publishCar">Publicar vehículo</span><span aria-hidden="true">↗</span></button></div>
+          <div class="form-bottom"><p id="note" class="form-status" role="status" aria-live="polite"></p><div class="form-actions"><button id="cancel-edit" class="secondary-button" type="button" hidden><span data-i18n="cancelEdit">Cancelar edición</span></button><button class="primary-button save-button" type="submit"><span id="submit-label" data-i18n="publishCar">Publicar vehículo</span><span aria-hidden="true">↗</span></button></div></div>
         </form>
       </section>
 
@@ -130,9 +130,21 @@
           <div><p class="eyebrow" data-i18n="liveInventory">INVENTARIO ONLINE</p><h2 id="inventory-title" data-i18n="inventoryTitle">Vehículos publicados</h2><p data-i18n="inventoryCopy">Los vehículos activos se muestran en tu web.</p></div>
           <span id="inventory-total" class="inventory-total">0</span>
         </header>
-        <div id="stock" class="inventory-list"></div>
+        <div class="inventory-tools">
+          <div class="inventory-tabs" role="tablist" data-i18n-aria="inventoryTabsLabel" aria-label="Estado del inventario">
+            <button class="inventory-tab" id="active-tab" type="button" role="tab" aria-controls="stock" data-inventory-tab="active" aria-selected="true"><span data-i18n="activeTab">En stock</span><b id="active-count">0</b></button>
+            <button class="inventory-tab" id="sold-tab" type="button" role="tab" aria-controls="stock" data-inventory-tab="sold" aria-selected="false"><span data-i18n="soldTab">Vendidos</span><b id="sold-count">0</b></button>
+          </div>
+          <div class="inventory-filters">
+            <label class="search-field" for="inventory-search"><span class="sr-only" data-i18n="searchInventoryLabel">Buscar en el inventario</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><input id="inventory-search" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar marca, modelo…"></label>
+            <label class="filter-field" for="inventory-fuel"><span class="sr-only" data-i18n="fuelFilterLabel">Filtrar por combustible</span><select id="inventory-fuel"><option value="" data-i18n="allFuel">Todos los combustibles</option><option value="Gasolina" data-i18n="fuelPetrol">Gasolina</option><option value="Diésel" data-i18n="fuelDiesel">Diésel</option><option value="Híbrido" data-i18n="fuelHybrid">Híbrido</option><option value="Eléctrico" data-i18n="fuelElectric">Eléctrico</option><option value="GLP">GLP</option></select></label>
+          </div>
+        </div>
+        <p id="inventory-message" class="inventory-message" role="status" aria-live="polite"></p>
+        <div id="stock" class="inventory-list" role="tabpanel" aria-live="polite"></div>
       </section>
     </div>
+    <dialog id="vehicle-dialog" class="vehicle-dialog" aria-labelledby="vehicle-dialog-title"><div class="vehicle-dialog-inner"><button id="close-vehicle-dialog" class="dialog-close" type="button" data-i18n-aria="closeDetails" aria-label="Cerrar detalles">×</button><div id="vehicle-dialog-content"></div></div></dialog>
     <footer class="dashboard-footer"><span>AUTO VERSE</span><span data-i18n="footerAdmin">ADMINISTRACIÓN PRIVADA</span></footer>
   </main>
 
