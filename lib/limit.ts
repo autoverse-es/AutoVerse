@@ -1,0 +1,3 @@
+import {Ratelimit} from "@upstash/ratelimit";import {Redis} from "@upstash/redis";
+let login:Ratelimit|undefined,contact:Ratelimit|undefined;function limiter(kind:"login"|"contact"){const redis=Redis.fromEnv();if(kind==="login")return login??=new Ratelimit({redis:Redis.fromEnv(),limiter:Ratelimit.slidingWindow(5,"15 m"),prefix:"av:login"});return contact??=new Ratelimit({redis,limiter:Ratelimit.slidingWindow(5,"1 h"),prefix:"av:contact"})}
+export async function allowed(req:any,kind:"login"|"contact"){const ip=String(req.headers["x-real-ip"]||req.headers["x-forwarded-for"]||"unknown").split(",")[0].trim();return (await limiter(kind).limit(ip)).success}

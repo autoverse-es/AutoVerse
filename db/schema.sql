@@ -1,0 +1,12 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE TABLE IF NOT EXISTS cars (
+ id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ brand TEXT NOT NULL, model TEXT NOT NULL, trim TEXT NOT NULL DEFAULT '',
+ price_eur INTEGER NOT NULL CHECK (price_eur > 0), year SMALLINT NOT NULL,
+ mileage_km INTEGER NOT NULL DEFAULT 0, fuel TEXT NOT NULL, transmission TEXT NOT NULL,
+ body_type TEXT NOT NULL DEFAULT '', description TEXT NOT NULL DEFAULT '',
+ image_urls TEXT[] NOT NULL DEFAULT '{}', featured BOOLEAN NOT NULL DEFAULT FALSE,
+ active BOOLEAN NOT NULL DEFAULT TRUE, created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+ updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS cars_active_idx ON cars(active,featured DESC,created_at DESC);
