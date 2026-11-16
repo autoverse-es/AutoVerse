@@ -44,8 +44,8 @@ export async function check(req: VercelRequest) {
     if (header.alg !== "HS256") return false;
 
     const content = headerPart + "." + payloadPart;
-    const expected = Buffer.from(signature(content), "base64url");
-    const actual = Buffer.from(suppliedSignature, "base64url");
+    const expected = Uint8Array.from(Buffer.from(signature(content), "base64url"));
+    const actual = Uint8Array.from(Buffer.from(suppliedSignature, "base64url"));
     if (expected.length !== actual.length || !timingSafeEqual(expected, actual)) return false;
 
     const payload = JSON.parse(Buffer.from(payloadPart, "base64url").toString("utf8"));
