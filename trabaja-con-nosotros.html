@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000"><meta name="description" content="¿Quieres formar parte de AUTO VERSE? Envíanos un mensaje y tu CV.">
+  <link rel="canonical" href="https://autoverse.es/trabaja-con-nosotros">
+  <title>Trabaja con nosotros | AUTO VERSE</title><link rel="stylesheet" href="assets/contact.css">
+</head>
+<body>
+  <header><a href="/" aria-label="AUTO VERSE"><img src="assets/auto-verse-wordmark.jpeg" alt="AUTO VERSE"></a><nav><a class="back" href="/" data-i18n="back">Ver coches</a><div class="language-switch" aria-label="Seleccionar idioma"><button type="button" data-language="es" aria-pressed="true">ES</button><button type="button" data-language="en" aria-pressed="false">EN</button><button type="button" data-language="ca" aria-pressed="false">CA</button></div></nav></header>
+  <main>
+    <div class="eyebrow" data-i18n="careersEyebrow">CRECE CON AUTO VERSE</div>
+    <h1 data-i18n="careersTitle">Trabaja con nosotros</h1>
+    <p class="intro" data-i18n="careersIntro">¿Te gustaría formar parte de AUTO VERSE? Cuéntanos un poco sobre ti y adjunta tu CV. Revisaremos tu candidatura y te contactaremos si surge una oportunidad adecuada.</p>
+    <div class="grid"><form id="careers-form">
+      <label><span data-i18n="name">Nombre</span><input name="name" required maxlength="100" autocomplete="name" data-i18n-placeholder="namePh" placeholder="Tu nombre"></label>
+      <label><span data-i18n="email">Correo electrónico</span><input name="email" required type="email" maxlength="254" autocomplete="email" data-i18n-placeholder="emailPh" placeholder="nombre@correo.com"></label>
+      <label><span data-i18n="phone">Teléfono (opcional)</span><input name="phone" type="tel" maxlength="30" autocomplete="tel"></label>
+      <label><span data-i18n="careersMessage">Mensaje</span><textarea name="message" required minlength="4" maxlength="2500" rows="6" data-i18n-placeholder="careersMessagePh" placeholder="Cuéntanos sobre ti y el tipo de oportunidad que buscas"></textarea></label>
+      <label><span data-i18n="cvLabel">Adjunta tu CV (PDF, DOC o DOCX; máximo 1 MB)</span><input id="cv" name="cv" type="file" required accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></label>
+      <label class="consent"><input name="consent" type="checkbox" required><span data-i18n-html="careersConsent">He leído la <a href="/privacidad.html">política de privacidad</a> y autorizo el uso de mis datos y CV para valorar mi candidatura.</span></label>
+      <label class="trap">No completar<input name="website" tabindex="-1" autocomplete="off"></label>
+      <button id="send" type="submit" data-i18n="careersSend">Enviar candidatura <span aria-hidden="true">↗</span></button><p id="status" role="status" aria-live="polite"></p>
+    </form><aside><h2 data-i18n="careersAsideTitle">Tu próximo paso</h2><p data-i18n="careersAsideCopy">Comparte tu experiencia y el tipo de trabajo que te interesa. Puedes adjuntar tu CV en PDF, DOC o DOCX.</p><p><b data-i18n="email">Correo electrónico</b><br><a href="mailto:info@autoverse.es">info@autoverse.es</a></p><p class="small" data-i18n="careersPrivacyNote">Usaremos esta información para gestionar tu candidatura. Consulta nuestra política de privacidad.</p></aside></div>
+  </main>
+  <footer><div class="footer-row"><span>© <span id="year"></span> AUTO VERSE</span><div><a href="/aviso-legal.html" data-i18n="legal">Aviso legal</a><a href="/privacidad.html" data-i18n="privacy">Privacidad</a><a href="/contacto" data-i18n="navContact">Contacto</a></div></div></footer>
+  <script src="assets/careers.js" defer></script>
+</body>
+</html>
